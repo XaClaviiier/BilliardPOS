@@ -1,0 +1,11 @@
+digraph G {
+rankdir=LR;
+graph [bgcolor="white", pad="0.26", nodesep="0.38", ranksep="0.55", fontname="Lato", fontsize=20, fontcolor="#172B42", labelloc=t, labeljust=l, splines=polyline, dpi=180];
+node [shape=box, style="rounded,filled", color="#9BAFC2", fillcolor="#F2F6FA", fontcolor="#172B42", fontname="Lato", fontsize=12, penwidth=1.4, margin="0.18,0.12"];
+edge [color="#147D77", fontcolor="#285E61", fontname="Lato", fontsize=10, penwidth=1.8, arrowsize=0.8];
+
+label="B  |  Server mati";
+
+k [label="Kasir (PWA)",fillcolor="#E7F5F2",color="#499B90"];db [label="IndexedDB",shape=cylinder,fillcolor="#E7F5F2",color="#499B90"];s [label="PC server lokal\nMati",fillcolor="#FFF0EF",color="#C95C56",fontcolor="#8B3936"];k -> db [label="Simpan offline"];db -> s [label="Sync saat pulih",style=dashed,color="#9A681D",fontcolor="#805711"];
+
+}

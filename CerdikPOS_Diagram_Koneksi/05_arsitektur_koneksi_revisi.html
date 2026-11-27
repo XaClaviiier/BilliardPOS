@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arsitektur Koneksi CerdikPOS</title>
+<style>
+:root{color-scheme:light;--paper:#fff;--ink:#172b42;--muted:#465e73;--line:#849caf;--accent:#147d77;--outer:#f8fafc;--box:#f2f6fa;--store:#e7f5f2}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 Lato,'Segoe UI',sans-serif}main{max-width:1224px;margin:auto;padding:32px 24px 24px}.kicker{color:var(--accent);font-size:.8rem;letter-spacing:.16em;font-weight:700;margin:0}h1{font-size:clamp(1.65rem,4vw,2.35rem);line-height:1.15;margin:8px 0 20px}.frame{overflow-x:auto}svg{display:block;width:100%;min-width:1168px;height:auto}text{fill:var(--ink)}.zone{fill:var(--outer);stroke:var(--line);stroke-width:1.4}.boundary{fill:var(--outer);stroke:var(--line);stroke-width:1.6;stroke-dasharray:8 5}.card{fill:var(--paper);stroke:var(--line);stroke-width:1.4}.node{fill:var(--box);stroke:var(--line);stroke-width:1.4}.store{fill:var(--store);stroke:var(--accent);stroke-width:1.5}.heading{font-size:17px;font-weight:700}.title{font-size:16px;font-weight:700}.small{fill:var(--muted);font-size:13px}.route{fill:none;stroke:var(--accent);stroke-width:2.3}.vpn{stroke:var(--muted);stroke-dasharray:7 5}.key{font-size:13px;font-weight:700}.notes{border-top:1px solid var(--line);margin:14px 0 0;padding-top:12px;font-size:.92rem;color:var(--muted)}.notes p{margin:4px 0}code{color:var(--ink)}
+@media print{@page{size:A4 landscape;margin:12mm}main{padding:0}.frame{overflow:visible}svg{min-width:0}}
+</style>
+</head>
+<body><main>
+<p class="kicker">CERDIKPOS / 05</p>
+<h1>Arsitektur koneksi</h1>
+<div class="frame">
+<svg viewBox="0 0 1168 500" role="img" aria-labelledby="cerdikpos-title cerdikpos-desc">
+<title id="cerdikpos-title">Arsitektur koneksi CerdikPOS</title>
+<desc id="cerdikpos-desc">Kasir dengan PWA dan IndexedDB serta server Docker berada di LAN outlet, sementara perangkat direktur mengakses dari luar lewat NetBird.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#147d77"/></marker></defs>
+<rect class="boundary" x="8" y="8" width="788" height="436" rx="10"/>
+<rect class="card" x="32" y="88" width="292" height="304" rx="8"/>
+<rect class="card" x="408" y="64" width="364" height="356" rx="8"/>
+<rect class="zone" x="428" y="112" width="324" height="220" rx="8"/>
+<rect class="card" x="932" y="260" width="224" height="136" rx="8"/>
+<text class="heading" x="32" y="40">LAN / Wi-Fi lokal outlet</text>
+<text class="heading" x="52" y="120">Perangkat kasir</text>
+<text class="heading" x="428" y="96">Server lokal</text>
+<text class="heading" x="448" y="144">Docker</text>
+<text class="small" x="932" y="244">Di luar LAN outlet</text>
+<text class="heading" x="952" y="292">Perangkat direktur</text>
+<!-- Aplikasi kasir mengakses server lewat LAN, bukan melalui basis data. -->
+<path class="route" d="M 200,316 H 356 Q 364,316 364,308 V 200 Q 364,192 372,192 H 448" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+<text class="key" x="388" y="176" text-anchor="middle">LAN</text>
+<path class="route" d="M 128,284 V 236" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+<path class="route" d="M 524,224 V 256" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+<path class="route vpn" d="M 628,364 H 856 Q 864,364 864,356 V 348 Q 864,340 872,340 H 952"/>
+<text class="key" x="864" y="324" text-anchor="middle">VPN NetBird</text>
+<!-- Kasir -->
+<path class="store" d="M 56,184 V 224 C 56,240 200,240 200,224 V 184 Z"/>
+<ellipse class="store" cx="128" cy="184" rx="72" ry="10"/>
+<text class="title" x="128" y="209" text-anchor="middle">IndexedDB</text>
+<text class="small" x="128" y="226" text-anchor="middle">Cache + antrean</text>
+<rect class="node" x="56" y="284" width="144" height="64" rx="6"/>
+<text class="title" x="128" y="312" text-anchor="middle">PWA Client</text>
+<text class="small" x="128" y="332" text-anchor="middle">Browser kasir</text>
+<rect class="node" x="212" y="180" width="92" height="56" rx="6"/>
+<text class="title" x="258" y="205" text-anchor="middle">NetBird</text>
+<text class="small" x="258" y="222" text-anchor="middle">Client</text>
+<!-- Server -->
+<rect class="node" x="448" y="160" width="152" height="64" rx="6"/>
+<text class="title" x="524" y="188" text-anchor="middle">PWA Server</text>
+<text class="small" x="524" y="208" text-anchor="middle">Backend Go / chi</text>
+<path class="store" d="M 448,268 V 304 C 448,320 600,320 600,304 V 268 Z"/>
+<ellipse class="store" cx="524" cy="268" rx="76" ry="10"/>
+<text class="title" x="524" y="293" text-anchor="middle">PostgreSQL</text>
+<text class="small" x="524" y="310" text-anchor="middle">Data utama</text>
+<rect class="node" x="620" y="180" width="112" height="56" rx="6"/>
+<text class="title" x="676" y="205" text-anchor="middle">NetBird</text>
+<text class="small" x="676" y="222" text-anchor="middle">Dalam Docker</text>
+<rect class="node" x="448" y="344" width="180" height="40" rx="6"/>
+<text class="title" x="538" y="370" text-anchor="middle">NetBird Client host</text>
+<!-- Direktur -->
+<rect class="node" x="952" y="316" width="184" height="48" rx="6"/>
+<text class="title" x="1044" y="346" text-anchor="middle">NetBird Client</text>
+<!-- Legenda -->
+<path class="route" d="M 32,476 H 72"/><text class="small" x="84" y="480">Koneksi aplikasi / data</text>
+<path class="route vpn" d="M 288,476 H 328"/><text class="small" x="340" y="480">Akses jarak jauh via NetBird</text>
+</svg>
+</div>
+<div class="notes">
+<p><strong>Catatan bind dari sketsa:</strong> <code>127.0.0.1</code> (localhost) hanya dapat diakses dari host atau kontainer tempat bind dilakukan. Itu bukan alamat kasir atau direktur; cara meneruskan akses ke layanan lokal perlu ditetapkan saat konfigurasi.</p>
+<p><strong>Mode offline kasir:</strong> PWA menyimpan transaksi ke IndexedDB, lalu mengirim antrean ke PWA Server saat koneksi lokal pulih.</p>
+</div>
+</main></body></html>

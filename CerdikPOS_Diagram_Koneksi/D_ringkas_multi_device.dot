@@ -1,0 +1,12 @@
+digraph G {
+rankdir=LR;
+graph [bgcolor="white", pad="0.26", nodesep="0.38", ranksep="0.55", fontname="Lato", fontsize=20, fontcolor="#172B42", labelloc=t, labeljust=l, splines=polyline, dpi=180];
+node [shape=box, style="rounded,filled", color="#9BAFC2", fillcolor="#F2F6FA", fontcolor="#172B42", fontname="Lato", fontsize=12, penwidth=1.4, margin="0.18,0.12"];
+edge [color="#147D77", fontcolor="#285E61", fontname="Lato", fontsize=10, penwidth=1.8, arrowsize=0.8];
+
+label="D  |  Direktur multi-device";
+
+h [label="HP"];l [label="Laptop"];p [label="PC"];t [label="Tablet"];v [label="NetBird VPN",shape=hexagon];s [label="PC server lokal",fillcolor="#E7F5F2",color="#499B90"];
+{rank=same;h;l;p;t;} h -> v;l -> v;p -> v;t -> v;v -> s [label="Sesi independen"];
+
+}

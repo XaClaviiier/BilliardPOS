@@ -1,0 +1,24 @@
+digraph G {
+rankdir=LR;
+graph [bgcolor="white", pad="0.26", nodesep="0.38", ranksep="0.55", fontname="Lato", fontsize=20, fontcolor="#172B42", labelloc=t, labeljust=l, splines=polyline, dpi=180];
+node [shape=box, style="rounded,filled", color="#9BAFC2", fillcolor="#F2F6FA", fontcolor="#172B42", fontname="Lato", fontsize=12, penwidth=1.4, margin="0.18,0.12"];
+edge [color="#147D77", fontcolor="#285E61", fontname="Lato", fontsize=10, penwidth=1.8, arrowsize=0.8];
+
+label="05  |  Arsitektur koneksi CerdikPOS";
+
+subgraph cluster_local {label="Establishment • LAN / Wi-Fi"; style="rounded,filled";color="#CBD9E4";fillcolor="#F8FAFC";fontname="Lato";fontsize=12;fontcolor="#51677B";labeljust=l;
+ k [label="Perangkat Kasir\nPWA responsif",fillcolor="#E7F5F2",color="#499B90"];
+ idb [label="IndexedDB\nCache + outbox",shape=cylinder,fillcolor="#E7F5F2",color="#499B90"];
+ lan [label="Wi-Fi / LAN",fillcolor="#E7F5F2",color="#499B90"];
+ s [label="PC server lokal\nPWA + Go / chi",fillcolor="#E7F5F2",color="#499B90"];
+ db [label="PostgreSQL\nSumber data utama",shape=cylinder,fillcolor="#E7F5F2",color="#499B90"];
+ k -> lan [label="Operasional normal",dir=both]; lan -> s [dir=both]; s -> db [dir=both];
+ k -> idb [label="Fallback offline",style=dashed,color="#9A681D",fontcolor="#805711"]; idb -> s [label="Sync saat pulih",style=dashed,color="#9A681D",fontcolor="#805711"];
+ {rank=same;k;idb;}
+}
+d [label="Direktur\nPC / laptop / HP / tablet"];
+v [label="NetBird VPN",shape=hexagon];
+i [label="Internet",shape=ellipse];
+d -> v [dir=both]; v -> i [dir=both]; i -> s [label="HTTPS privat",dir=both];
+
+}

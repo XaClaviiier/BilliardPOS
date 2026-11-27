@@ -1,0 +1,9 @@
+# Local credentials
+.env
+.env.*
+!.env.example
+
+# Local billing and reference files
+/InvoiceDomain_CerdikPos.pdf
+/WhatsApp Image 2026-11-25 at 17.28.12.jpeg
+/CerdikPOS_Diagram_Koneksi.zip

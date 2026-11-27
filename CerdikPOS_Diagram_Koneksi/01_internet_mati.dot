@@ -1,0 +1,21 @@
+digraph G {
+rankdir=LR;
+graph [bgcolor="white", pad="0.26", nodesep="0.38", ranksep="0.55", fontname="Lato", fontsize=20, fontcolor="#172B42", labelloc=t, labeljust=l, splines=polyline, dpi=180];
+node [shape=box, style="rounded,filled", color="#9BAFC2", fillcolor="#F2F6FA", fontcolor="#172B42", fontname="Lato", fontsize=12, penwidth=1.4, margin="0.18,0.12"];
+edge [color="#147D77", fontcolor="#285E61", fontname="Lato", fontsize=10, penwidth=1.8, arrowsize=0.8];
+
+label="01  |  Internet mati, LAN tetap aktif";
+
+subgraph cluster_local {label="Jaringan lokal kafe"; style="rounded,filled";color="#CBD9E4";fillcolor="#F8FAFC";fontname="Lato";fontsize=12;fontcolor="#51677B";labeljust=l;
+ k [label="Perangkat Kasir\nPWA",fillcolor="#E7F5F2",color="#499B90"];
+ lan [label="Wi-Fi / LAN",shape=box,fillcolor="#E7F5F2",color="#499B90"];
+ s [label="PC server lokal\nPWA + Go API",fillcolor="#E7F5F2",color="#499B90"];
+ db [label="PostgreSQL\nData transaksi",shape=cylinder,fillcolor="#E7F5F2",color="#499B90"];
+ k -> lan -> s -> db;
+}
+d [label="Direktur\nPerangkat pribadi"];
+i [label="Internet / WAN\nKoneksi terputus",shape=ellipse,fillcolor="#FFF0EF",color="#C95C56",fontcolor="#8B3936"];
+d -> i [label="NetBird VPN",style=dashed,color="#C95C56",fontcolor="#9C413B",arrowhead=tee];
+i -> s [label="Tidak dapat diakses",style=dashed,color="#C95C56",fontcolor="#9C413B",arrowhead=tee];
+
+}

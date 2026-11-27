@@ -1,0 +1,21 @@
+digraph G {
+rankdir=LR;
+graph [bgcolor="white", pad="0.26", nodesep="0.38", ranksep="0.55", fontname="Lato", fontsize=20, fontcolor="#172B42", labelloc=t, labeljust=l, splines=polyline, dpi=180];
+node [shape=box, style="rounded,filled", color="#9BAFC2", fillcolor="#F2F6FA", fontcolor="#172B42", fontname="Lato", fontsize=12, penwidth=1.4, margin="0.18,0.12"];
+edge [color="#147D77", fontcolor="#285E61", fontname="Lato", fontsize=10, penwidth=1.8, arrowsize=0.8];
+
+label="03  |  Internet kafe mati: perspektif Direktur";
+
+d [label="Direktur di luar lokasi\nPC / laptop / HP / tablet"];
+v [label="NetBird VPN",shape=hexagon];
+i [label="Internet kafe\nTerputus",shape=ellipse,fillcolor="#FFF0EF",color="#C95C56",fontcolor="#8B3936"];
+subgraph cluster_local {label="Jaringan lokal kafe"; style="rounded,filled";color="#CBD9E4";fillcolor="#F8FAFC";fontname="Lato";fontsize=12;fontcolor="#51677B";labeljust=l;
+ s [label="PC server lokal\nGo API + PWA",fillcolor="#E7F5F2",color="#499B90"];
+ db [label="PostgreSQL",shape=cylinder,fillcolor="#E7F5F2",color="#499B90"];
+ k [label="Perangkat Kasir\nPWA",fillcolor="#E7F5F2",color="#499B90"];
+ k -> s [label="LAN aktif"]; s -> db;
+}
+d -> v [label="Akses remote",color="#8294A5",fontcolor="#51677B"];
+v -> i [style=dashed,color="#C95C56",arrowhead=none]; i -> s [label="Akses tertunda",style=dashed,color="#C95C56",fontcolor="#9C413B",arrowhead=tee];
+
+}
