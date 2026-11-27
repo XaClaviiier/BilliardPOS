@@ -1,12 +1,12 @@
 # CerdikPOS — Stack dan kontrak internal
 
-Status: rancangan hasil validasi 1.3, revisi offline-first, backend TypeScript, autentikasi dan VPN, menunggu persetujuan Phase 1. Aturan bisnis dan AC: [requirement.md](requirement.md). Model simpan: [database.md](database.md); kontrol akses: [security.md](security.md).
+Status: Phase 1 disetujui. Dokumen ini menetapkan stack utama dan kontrak internal; library berlabel usulan, versi paket dan pilihan TLS yang masih terbuka tidak otomatis disetujui untuk diinstal. Aturan bisnis dan AC: [requirement.md](requirement.md). Model data: [database.md](database.md); kontrol akses: [security.md](security.md).
 
 > Revisi frontend: Tailwind CSS, shadcn/ui, Zustand, TanStack Query dan library pendukung menggantikan batasan CSS biasa pada rancangan awal. Kontrak API dan mekanisme nota kertas dipertahankan.
 
 > Perubahan jaringan: VPN-only untuk semua peran; seluruh dokumen diselaraskan. Backend produksi menggunakan TypeScript + Fastify dengan Better Auth terintegrasi dalam satu proses Node.js.
 
-## Keputusan teknis yang diusulkan
+## Keputusan teknis Phase 1
 
 | Bagian | Pilihan dan alasan |
 |---|---|

@@ -1,6 +1,6 @@
 # CerdikPOS — Keamanan dan bukti penerimaan
 
-Status: rancangan kontrol hasil validasi 1.3, revisi offline-first, backend TypeScript, autentikasi dan VPN, menunggu persetujuan Phase 1. Bukan laporan vulnerability, hasil pentest, atau bukti implementasi. Hak peran: [requirement.md](requirement.md); endpoint: [stack.md](stack.md); persistensi: [database.md](database.md).
+Status: Phase 1 disetujui untuk rancangan kontrol keamanan. Persetujuan ini bukan laporan kerentanan, hasil pentest, atau bukti implementasi. Hak peran: [requirement.md](requirement.md); endpoint: [stack.md](stack.md); persistensi: [database.md](database.md).
 
 ## Aset dan batas kepercayaan
 

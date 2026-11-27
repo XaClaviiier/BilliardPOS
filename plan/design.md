@@ -1,6 +1,6 @@
 # CerdikPOS — Rancangan interaksi
 
-Status: rancangan Phase 1, bukan prototype atau bukti uji. Selaras dengan [kebutuhan](requirement.md), [kontrak API](stack.md), [model data](database.md), dan [keamanan](security.md). Prototype tetap HTML/CSS/JS vanilla; frontend produksi memakai React + TypeScript + Vite, Tailwind CSS dan shadcn/ui.
+Status: Phase 1 disetujui untuk rancangan interaksi, bukan persetujuan prototype atau bukti uji. Alur mengikuti [kebutuhan](requirement.md), [kontrak API](stack.md), [model data](database.md), dan [keamanan](security.md). Prototype memakai HTML/CSS/JS vanilla; frontend produksi memakai React + TypeScript + Vite, Tailwind CSS dan shadcn/ui.
 
 ## Struktur layar
 
