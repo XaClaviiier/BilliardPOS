@@ -1,6 +1,6 @@
 # CerdikPOS: Spesifikasi sistem
 
-**Status:** baseline fitur dan rancangan teknis yang akan dibangun. Ini bukan catatan implementasi atau bukti lulus uji. **Terbuka** berarti keputusan belum boleh diasumsikan; **usulan** berarti pilihan teknis belum ditetapkan.
+**Arsip spesifikasi awal, bukan acuan implementasi saat ini.** Isi dan diagram di bawah merekam rancangan lama. Gunakan [kebutuhan terkini](plan/requirement.md), [stack dan kontrak](plan/stack.md), [desain](plan/design.md), [model data](plan/database.md) dan [keamanan](plan/security.md). Referensi penyelarasan adalah folder `cerdikpos-offline-first_UPDATE/`; arsip ZIP dan sketsa koneksi lama bukan sumber aturan baru. Tidak ada klaim implementasi atau hasil uji dalam dokumen ini.
 
 ## 1\. Cakupan
 

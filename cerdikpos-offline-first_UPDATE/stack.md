@@ -58,7 +58,6 @@ Gunakan TanStack Query untuk data server dan Zustand untuk state UI yang benar-b
 | Cache Storage API | Aset aplikasi saja, bukan transaksi, laporan, respons sesi atau data pelanggan |
 | `AbortController` | Membatasi waktu tunggu request; timeout tidak membuktikan transaksi gagal |
 | `crypto.randomUUID()` | Identitas request yang dipakai kembali untuk replay identik sesuai kontrak |
-
 | IndexedDB + `dexie` | Database lokal kasir, transaksi atomik snapshot/proyeksi/outbox |
 | `dexie-react-hooks` | Query reaktif lokal melalui `useLiveQuery` |
 | StorageManager (`navigator.storage.persist`, `estimate`) | Minta persistensi dan pantau quota; bukan jaminan data tidak hilang |
@@ -200,7 +199,7 @@ Semua endpoint di bawah berada pada `/api/v1`, melalui NetBird dan sesi Better A
 | `POST /sync/operations` | FIFO perangkat: `{request_id,grant_id,snapshot_id,sequence,original_cashier_id,kind,occurred_at,business_date,payload}`. Jenis penjualan/rental tetap; `cashier_switch` merekam pergantian tanpa pembayaran atau efek stok/meja. Pengirim online memakai sesi sahnya sendiri. | Server mencocokkan pencatat dengan daftar petugas grant, perangkat, waktu dan urutan pergantian; jangan memakai akun pengirim sebagai pencatat asal. Asal/pencabutan meragukan masuk pemeriksaan. Receipt mengakui commit dengan ID asli. |
 | `POST /offline/close` | Kasir online menutup grant setelah semua operasi dicocokkan dan sequence akhir dikonfirmasi perangkat. | Membuka perubahan master terkait; pergantian shift dan kedaluwarsa tidak menutup periode secara otomatis. |
 
-Sync mengembalikan receipt `{request_id,status,result_ref,server_time,rental_id?,case_ids?}` hanya setelah commit. Replay identik menghasilkan receipt sama; ID/sequence berbeda isi `409`. Konflik tercatat sebagai kasus melalui transaksi server bila pembayaran sudah terjadi, status `needs_review`; tidak menganggap kasus sebagai pembayaran final. Grant kedaluwarsa tidak otomatis membatalkan transaksi yang sudah dicatat dalam periode: login online ulang, verifikasi bukti/waktu dan status grant, lalu kirim; bila meragukan tahan untuk review. Restore wajib recovery gate sebelum replay; 404 bukan bukti belum commit. Snapshot baru hanya setelah antrean aman; tidak menimpa transaksi lokal. Laporan server menunjukkan periode offline masih terbuka dan waktu data terakhir.
+Sinkronisasi mengembalikan receipt `{request_id,status,result_ref,server_time,rental_id?,case_ids?}` hanya setelah commit. Replay identik menghasilkan receipt sama; ID/sequence sama dengan isi berbeda menghasilkan `409`. `needs_review` menahan pengiriman FIFO berikutnya sampai kasus diputuskan. Status ini bukan keputusan pembukuan: pembayaran terbukti dengan konflik stok tetap dicatat sekali; bukti pembayaran/otorisasi meragukan tidak otomatis masuk omzet final. Grant kedaluwarsa tidak membatalkan transaksi lama; login online ulang, periksa waktu, roster dan grant sebelum pengiriman. Setelah restore, tahan replay sampai direktur menyelesaikan pencocokan; `404` bukan bukti transaksi tidak pernah disimpan. Jangan timpa proyeksi pending dengan snapshot baru. Laporan menampilkan periode yang masih terbuka dan waktu data terakhir.
 
 
 Konvensi yang digunakan mock dan server:
